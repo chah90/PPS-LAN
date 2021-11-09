@@ -3153,7 +3153,7 @@ int set(int line      // the ProgNr of the heater parameter
       {
         int dow = atoi(val);
         pps_values[PPS_DOW] = dow;
-        setTime(hour(), minute(), second(), dow, 1, 2018);
+        setTime(hour(), minute(), second(), (dow == 1 ? 7 : dow - 1), 1, 2018);
 //        printFmtToDebug(PSTR("Setting weekday to %d\r\n"), weekday());
         pps_wday_set = true;
         break;

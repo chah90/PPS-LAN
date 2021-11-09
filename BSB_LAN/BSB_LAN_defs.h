@@ -13536,8 +13536,8 @@ PROGMEM_LATE const cmd_t cmdtbl3[]={
 
 //PPS-Bus commands
 #define PPS_BA  0
-#define PPS_PDK 1
-#define PPS_AW  2
+#define PPS_PDK 2
+#define PPS_AW  1
 #define PPS_FDT 3
 #define PPS_RTS 4
 #define PPS_RTA 5
@@ -13629,7 +13629,7 @@ PROGMEM_LATE const cmd_t cmdtbl3[]={
 {0x2D2E0020,  CAT_PPS,              VT_TEMP,          15032, STR8743,  0,                    NULL,         FL_RONLY, DEV_ALL},     // Kesselvorlauftemperatur
 {0x2D0E0021,  CAT_PPS,              VT_TEMP,          15033, STR8744,  0,                    NULL,         FL_RONLY, DEV_ALL},     // Kesselvorlauftemperatur Soll
 {0x2D2C0022,  CAT_PPS,              VT_TEMP,          15034, STR15034, 0,                    NULL,         FL_RONLY, DEV_ALL},     // Mischervorlauftemperatur
-{0x2D190023,  CAT_PPS,              VT_TEMP,          15035, STR15035, 0,                    NULL,         FL_RONLY, DEV_ALL},     // Zieltemperatur (entweder Absenktemperatur oder Komforttemperatur zzgl. Drehknopfposition)
+{0x2D190023,  CAT_PPS,              VT_TEMP,          15035, STR15035, 0,                    NULL,         DEFAULT_FLAG+FL_EEPROM, DEV_ALL},     // Zieltemperatur (entweder Absenktemperatur oder Komforttemperatur zzgl. Drehknopfposition)
 {0x2D790028,  CAT_PPS,              VT_PPS_TIME,      15040, STR15040, 0,                    NULL,         DEFAULT_FLAG, DEV_ALL}, // Heater time
 {0x2D790029,  CAT_PPS,              VT_WEEKDAY,       15041, STR15041, sizeof(ENUM_WEEKDAY), ENUM_WEEKDAY, DEFAULT_FLAG, DEV_ALL}, // Heater day of week
 {0x2D69002A,  CAT_PPS,              VT_TEMP,          15042, STR15042, 0,                    NULL,         FL_NO_CMD, DEV_ALL},    // Nächstes Heizprogramm

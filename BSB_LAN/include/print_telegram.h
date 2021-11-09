@@ -788,6 +788,10 @@ void printTelegram(byte* msg, int query_line) {
       }
     }
   }
+//  if (msg[0] == 0x00 && msg[1] == 0x4C ) {
+//	  // PPS telegram: 00 4C 00 00 00 00 00 00 00
+//	  known = false;
+//  }
   if (!known || msg[0] == 0x17) { // no hex code match or PPS RTS telegram type
     // Entry in command table is "UNKNOWN" (0x00000000)
     if (bus->getBusType() != BUS_PPS) {
