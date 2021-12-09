@@ -4502,7 +4502,7 @@ void internalLEDBlinking(uint16_t period, uint16_t count) {
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
 }
 
-#include "include/pps_handling.h"
+#include "pps_handling.h"
 #include "include/broadcast_msg_handling.h"
 
 /** *****************************************************************
