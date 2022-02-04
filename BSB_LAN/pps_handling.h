@@ -52,21 +52,15 @@ uint16_t pps_bus_handling(byte *msg) {
 
             }
             case 8:
-			  msg_cycle++;
-            case 9:
-			  msg_cycle++;
-            case 10:
               tx_msg[1] = 0x0B; // Trinkwassertemperatur Soll
               tx_msg[6] = pps_values[PPS_TWS] >> 8;
               tx_msg[7] = pps_values[PPS_TWS] & 0xFF;
               break;
-            case 11:
+            case 9:
               tx_msg[1] = 0x4C; // Präsenz
               tx_msg[7] = pps_values[PPS_AW];
               break;
-            case 12:
-			  msg_cycle++;
-            case 13:
+            case 10:
             {
                 tx_msg[1] = 0x79;
                 tx_msg[4] = pps_values[PPS_DOW]; // day of week
@@ -75,32 +69,12 @@ uint16_t pps_bus_handling(byte *msg) {
                 tx_msg[7] = second(); // second
                 break;
             }
-            case 14:
-			  msg_cycle++;	
-            case 15:
-			  msg_cycle++;
-            case 16:
-			  msg_cycle++;
-            case 17:
-			  msg_cycle++;
-            case 18:
-			  msg_cycle++;
-            case 19:
-			  msg_cycle++;
-            case 20:
-			  msg_cycle++;
-            case 21:
-			  msg_cycle++;
-            case 22:
+            case 11:
               tx_msg[1] = 0x7C;
               tx_msg[7] = pps_values[PPS_FDT];     // Verbleibende Feriendauer in Tagen
-			  msg_cycle++;
-              break;
-            case 23:
-			  msg_cycle++;
+			        msg_cycle++;
           }
-          msg_cycle++;
-          if (msg_cycle > 23) {
+          if (msg_cycle > 11) {
             msg_cycle = 0;
           }
           if (saved_msg_cycle > 0) {
@@ -131,24 +105,15 @@ uint16_t pps_bus_handling(byte *msg) {
           if (msg[0] == 0x1E) {   // Anfragen der Therme nach bestimmten Parametern
             saved_msg_cycle = msg_cycle;
             switch (msg[1]) {
-              case 0x08: msg_cycle = 8; break;
-              case 0x09: msg_cycle = 9; break;
-              case 0x0B: msg_cycle = 10; break;
+              case 0x0B: msg_cycle = 8; break;
               case 0x38: msg_cycle = 0; break;
               case 0x48: msg_cycle = 1; break;
               case 0x49: msg_cycle = 5; break;
-              case 0x4C: msg_cycle = 11; break;
+              case 0x4C: msg_cycle = 9; break;
               case 0x4D: msg_cycle = 2; break;
               case 0x4F: msg_cycle = 3; break;
-              case 0x60: msg_cycle = 15; break;
-              case 0x61: msg_cycle = 16; break;
-              case 0x62: msg_cycle = 17; break;
-              case 0x63: msg_cycle = 18; break;
-              case 0x64: msg_cycle = 19; break;
-              case 0x65: msg_cycle = 20; break;
-              case 0x66: msg_cycle = 21; break;
-              case 0x7C: msg_cycle = 22; break;
-              case 0x79: msg_cycle = 13; break;
+              case 0x7C: msg_cycle = 11; break;
+              case 0x79: msg_cycle = 10; break;
               default:
                 printToDebug(PSTR("Unknown request: "));
                 SerialPrintRAW(msg, 9);

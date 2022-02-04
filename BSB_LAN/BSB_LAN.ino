@@ -4522,24 +4522,6 @@ void internalLEDBlinking(uint16_t period, uint16_t count) {
  *   server instance
  * *************************************************************** */
 void loop() {
-
-#if defined(WIFI) && defined(ESP32)
-//  esp_task_wdt_reset();
-  // if WiFi is down, try reconnecting every 5 minutes
-  if (WiFi.status() != WL_CONNECTED) {
-    if ((millis() - WiFiMillis) >= 300000) {
-      Serial.print(millis());
-      Serial.println(F(" Reconnecting to WiFi..."));
-      WiFi.disconnect();
-      WiFi.reconnect();
-      WiFiMillis = millis();
-    }
-  }
-  else {
-    WiFiMillis = millis();
-  }
-#endif
-
   byte  msg[33] = { 0 };                       // response buffer
   byte  tx_msg[33] = { 0 };                    // xmit buffer
   char c = '\0';
@@ -4598,20 +4580,8 @@ void loop() {
     // Method GetMessage() validates length byte and CRC.
     if (bus->GetMessage(msg) || busmsg == true) { // message was syntactically correct
        // Decode the rcv telegram and send it to the PC serial interface
-      if (verbose && bus->getBusType() != BUS_PPS && !monitor) {  // verbose output for PPS comes later
-        printTelegram(msg, -1);
-        LogTelegram(msg);
-      }
 
-      // Is this a broadcast message?
-      broadcast_msg_handling(msg);
-
-// PPS-Bus handling
-      if (bus->getBusType() == BUS_PPS) {
-     log_now = pps_bus_handling(msg);
-
-
-      } // End PPS-bus handling
+        log_now = pps_bus_handling(msg);
 
     } // endif, GetMessage() returned True
 
@@ -4623,12 +4593,7 @@ void loop() {
   client = server->available();
   if ((client || SerialOutput->available()) && client_flag == false) {
     client_flag = true;
-/*
-#ifdef ESP32
-    esp_task_wdt_init(10,true);
-    esp_task_wdt_add(NULL);
-#endif
-*/
+
     IPAddress remoteIP = client.remoteIP();
     // Use the overriden operater for a safe comparison, note, that != is not overriden.
     if ((trusted_ip_addr[0] != 0 && ! (remoteIP == trusted_ip_addr))
@@ -4646,11 +4611,7 @@ void loop() {
     bPlaceInBuffer=0;            // index into cLineBuffer
     while (client.connected() || SerialOutput->available()) {
       if (client.available() || SerialOutput->available()) {
-/*
-#ifdef ESP32
-        esp_task_wdt_reset();
-#endif
-*/
+
         loopCount = 0;
         if (client.available()) {
           c = client.read();       // read one character
