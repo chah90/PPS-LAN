@@ -1256,7 +1256,7 @@ const char ENUM15046[] = {
 {0x2D090005,  VT_TEMP,          15005, STR15005, 0,                    NULL,         DEFAULT_FLAG+FL_EEPROM, DEV_ALL}, // Raumtemperatur Abwesenheit Soll
 {0x2D1B0006,  VT_TEMP,          15006, STR15006, 0,                    NULL,         FL_RONLY, DEV_ALL}, // Frostschutz-Sollwert
 {0x2D1B0007,  VT_TEMP,          15007, STR15007, 0,                    NULL,         FL_RONLY, DEV_ALL}, // Sollwert-Maximum
-{0x2D280008,  VT_TEMP,          15008, STR15008, 0,                    NULL,         DEFAULT_FLAG, DEV_ALL}, // Raumtemperatur Ist
+{0x2D280008,  VT_TEMP,          15008, STR15008, 0,                    NULL,         DEFAULT_FLAG+FL_EEPROM, DEV_ALL}, // Raumtemperatur Ist
 {0x2D570014,  VT_ONOFF,         15020, STR15020, sizeof(ENUM_ONOFF),   ENUM_ONOFF,   FL_RONLY, DEV_ALL},     // Trinkwasserladung
 {0x2D2B0015,  VT_TEMP,          15021, STR15021, 0,                    NULL,         FL_RONLY, DEV_ALL},     // Trinkwassertemperatur Ist
 {0x2D1E0016,  VT_TEMP,          15022, STR15022, 0,                    NULL,         FL_RONLY, DEV_PPS},     // Trinkwassertemperatur Reduziert Soll
@@ -1268,7 +1268,7 @@ const char ENUM15046[] = {
 {0x2D100020,  VT_TEMP,          15032, STR15032, 0,                    NULL,         FL_RONLY, DEV_PPS_EC},  // Kesselvorlauftemperatur
 {0x2D0E0021,  VT_TEMP,          15033, STR15033, 0,                    NULL,         DEFAULT_FLAG, DEV_ALL}, // Kesselvorlauftemperatur Soll (writing only makes sense on MCBA/DC225 systems)
 {0x2D2C0022,  VT_TEMP,          15034, STR15034, 0,                    NULL,         FL_RONLY, DEV_ALL},     // Mischervorlauftemperatur
-{0x2D190023,  VT_TEMP,          15035, STR15035, 0,                    NULL,         FL_RONLY, DEV_ALL},     // Zieltemperatur (entweder Absenktemperatur oder Komforttemperatur zzgl. Drehknopfposition)
+{0x2D190023,  VT_TEMP,          15035, STR15035, 0,                    NULL,         DEFAULT_FLAG+FL_EEPROM, DEV_ALL},     // Zieltemperatur (entweder Absenktemperatur oder Komforttemperatur zzgl. Drehknopfposition)
 {0x2D4A0024,  VT_PERCENT,       15036, STR15036, 0,                    NULL,         FL_RONLY, DEV_ALL},     // Brennermodulation
 {0x2D790028,  VT_PPS_TIME,      15040, STR15040, 0,                    NULL,         DEFAULT_FLAG, DEV_ALL}, // Heater time
 {0x2D790029,  VT_WEEKDAY,       15041, STR15041, sizeof(ENUM_WEEKDAY), ENUM_WEEKDAY, DEFAULT_FLAG, DEV_ALL}, // Heater day of week
